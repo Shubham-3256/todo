@@ -1,25 +1,54 @@
- 
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <title>To-Do List</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet" />
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <!-- Custom CSS -->
     <link rel="stylesheet" href="/style.css">
 </head>
-<body>
-    <h1>To-Do List</h1>
-    <form action="/add" method="POST">
-        <input type="text" name="task" placeholder="New task..." required>
-        <button type="submit">Add Task</button>
-    </form>
-    <ul>
-        <% tasks.forEach(task => { %>
-            <li>
-                <%= task.name %>
-                <form action="/delete/<%= task._id %>" method="POST">
-                    <button type="submit">Delete</button>
-                </form>
-            </li>
-        <% }) %>
-    </ul>
+<body class="bg-light">
+
+    <!-- Container for the To-Do List App -->
+    <div class="container mt-5">
+
+        <!-- Header -->
+        <div class="text-center mb-4">
+            <h1 class="display-4">To-Do List</h1>
+            <p class="lead">Manage your tasks easily</p>
+        </div>
+
+        <!-- Form to Add Tasks -->
+        <form action="/add" method="POST" class="form-inline justify-content-center mb-4">
+            <div class="form-group">
+                <input type="text" name="task" class="form-control" placeholder="New task..." required>
+            </div>
+            <button type="submit" class="btn btn-primary ml-2">Add Task</button>
+        </form>
+
+        <!-- List of Tasks -->
+        <ul class="list-group">
+            <% tasks.forEach(task => { %>
+                <li class="list-group-item d-flex justify-content-between align-items-center">
+                    <%= task.name %>
+
+                    <!-- Delete Button -->
+                    <form action="/delete/<%= task._id %>" method="POST" class="d-inline">
+                        <button type="submit" class="btn btn-danger btn-sm">
+                            <i class="fas fa-trash"></i> Delete
+                        </button>
+                    </form>
+                </li>
+            <% }) %>
+        </ul>
+
+    </div>
+
+    <!-- Bootstrap JS and Dependencies -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
 </html>
